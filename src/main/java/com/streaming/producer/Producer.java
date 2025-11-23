@@ -1,4 +1,4 @@
-package com.kafka.producer;
+package com.streaming.producer;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -17,15 +17,16 @@ public class Producer {
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(props);
 
         for (int i = 0; i < 2; i++) {
-            ProducerRecord<String, String> data;
-            if (i % 2 == 0) {
-                data = new ProducerRecord<String, String>("even", 0, Integer.toString(i), String.format("%d is even", i));
-            } else {
-                data = new ProducerRecord<String, String>("odd", 0, Integer.toString(i), String.format("%d is odd", i));
-            }
-            producer.send(data);
+            ProducerRecord<String, String> record;
+            record = new ProducerRecord<String, String>("test", 0, Integer.toString(i), String.format("%d is a number", i));
+            
+            System.out.printf("Producing record: %s: %s%n", record.key(), record.value());
+            producer.send(record);
+            
             Thread.sleep(1L);
         }
+        
+        producer.flush();
         producer.close();
     }
 }

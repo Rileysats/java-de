@@ -17,9 +17,11 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>shaded</shadedClassifierName>
               <transformers>
                 <transformer>
-                  <mainClass>com.kafka.producer.Producer</mainClass>
+                  <mainClass>com.streaming.main.Runner</mainClass>
                 </transformer>
               </transformers>
             </configuration>
